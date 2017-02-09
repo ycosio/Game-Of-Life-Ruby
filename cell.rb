@@ -1,7 +1,7 @@
 class Cell
   attr_accessor :life
   def initialize
-    @life = [true, false].sample
+    @life = [1, 0].sample
   end
 
 end

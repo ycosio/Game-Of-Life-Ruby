@@ -9,22 +9,18 @@ class Player
   def draw
     @game.row.times do |row|
       @game.col.times do |col|
-       print @game.board[row][col].life  == 0 ? " . ": " O "
+       print @game.board[row][col].life  == 0 ? ".":"O"
       end
       print "\n"
     end
   end
 
   def next_generation
-    temporal_board = @game
     @game.row.times do |row|
       @game.col.times do |col|
-        temporal_board.board[row][col].life = kill_or_revive(@game.board[row][col].life,@game.neighbors(row,col).inject(:+))
+        @game.board[row][col].life = kill_or_revive(@game.board[row][col].life,@game.neighbors(row,col).inject(:+)) == 0 ? ".":"O"
       end
     end
-    draw
-    @game = temporal_board
-    return
   end
 
   def kill_or_revive(cell,neighbors)
